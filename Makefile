@@ -8,6 +8,7 @@ all: pi
 
 pi: estimate_pi.c
 	$(CC) $(CFLAGS) -o estimate_pi estimate_pi.c  $(LDFLAGS)
+	$(CC) $(CFLAGS) -o estimate_pi_parallel estimate_pi_parallel.c $(LDFLAGS)
 
 clean:
-	rm -f estimate_pi pi.o*
+	rm -f estimate_pi estimate_pi_parallel pi.o* *.o4*

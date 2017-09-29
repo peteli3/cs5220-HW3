@@ -12,6 +12,7 @@
 
 # Change directories to where this script (and our executable) is.
 cd "$PBS_O_WORKDIR"
+module load intel
 export OMP_NUM_THREADS=12
 
 # Run the computations we want to.

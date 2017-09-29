@@ -17,9 +17,7 @@ int main(int argc, char **argv)
    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
    int count = 0;
-   int i,j;
-
-   #pragma omp parallel shared(count) private(i,j)
+   #pragma omp reduction(+:count)
    {
       // Chunk 1
 
@@ -33,16 +31,20 @@ int main(int argc, char **argv)
       // Chunk 2
 
       /* Loop over Randomly Generated Numbers */
-      # pragma omp parallel
-      for(j = 0; j < niter; j += batchsize)
-      {
-         vsRngUniform( VSL_RNG_METHOD_UNIFORM_STD, stream, batchsize, rand_buffer_x, 0.0, 1.0 );
-         vsRngUniform( VSL_RNG_METHOD_UNIFORM_STD, stream, batchsize, rand_buffer_y, 0.0, 1.0 );
+      int i,j;
 
-         for(i = 0; i < batchsize; i++)
+      # pragma omp parallel shared(s)
+      {
+         for(j = 0; j < niter; j += batchsize)
          {
-            float z = (rand_buffer_y[i] * rand_buffer_y[i]) + (rand_buffer_x[i] * rand_buffer_x[i]);
-            if (z <= 1) count++;
+            vsRngUniform( VSL_RNG_METHOD_UNIFORM_STD, stream, batchsize, rand_buffer_x, 0.0, 1.0 );
+            vsRngUniform( VSL_RNG_METHOD_UNIFORM_STD, stream, batchsize, rand_buffer_y, 0.0, 1.0 );
+
+            for(i = 0; i < batchsize; i++)
+            {
+               float z = (rand_buffer_y[i] * rand_buffer_y[i]) + (rand_buffer_x[i] * rand_buffer_x[i]);
+               if (z <= 1) count++;
+            }
          }
       }
 

@@ -16,7 +16,10 @@ int main(int argc, char **argv)
    /* ~~~~~~~~~~~~~~~~~PARALLELIZE ME~~~~~~~~~~~~~~~~~~ */
    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-   #pragma omp parallel
+   int count = 0;
+   int i,j;
+
+   #pragma omp parallel shared(count) private(i,j)
    {
       // Chunk 1
 
@@ -30,10 +33,7 @@ int main(int argc, char **argv)
       // Chunk 2
 
       /* Loop over Randomly Generated Numbers */
-      int count = 0;
-      int i,j;
-
-      # pragma omp for
+      # pragma omp parallel
       for(j = 0; j < niter; j += batchsize)
       {
          vsRngUniform( VSL_RNG_METHOD_UNIFORM_STD, stream, batchsize, rand_buffer_x, 0.0, 1.0 );

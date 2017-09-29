@@ -17,7 +17,7 @@ int main(int argc, char **argv)
    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
    int count = 0;
-   #pragma omp reduction(+:count)
+   #pragma omp parallel shared(s) reduction(+:count)
    {
       // Chunk 1
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv)
       /* Loop over Randomly Generated Numbers */
       int i,j;
 
-      # pragma omp parallel shared(s)
+      # pragma omp for
       {
          for(j = 0; j < niter; j += batchsize)
          {

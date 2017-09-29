@@ -1,0 +1,14 @@
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) cmake/3.9.0     2) curl/7.54.0
+
+num trials=1000, estimate of pi=3.104000
+num trials=2000, estimate of pi=3.120000
+num trials=4000, estimate of pi=3.108000
+num trials=8000, estimate of pi=3.146000
+num trials=16000, estimate of pi=3.130250
+num trials=32000, estimate of pi=3.138750
+num trials=64000, estimate of pi=3.137188
+num trials=128000, estimate of pi=3.143781
+num trials=256000, estimate of pi=3.142734
+num trials=512000, estimate of pi=3.142930

@@ -17,7 +17,7 @@ int main(int argc, char **argv)
    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
    int count = 0;
-   #pragma omp parallel shared(count) reduction(+:count)
+   #pragma omp parallel reduction(+:count)
    {
       // Chunk 1
 

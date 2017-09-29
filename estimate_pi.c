@@ -11,18 +11,18 @@ int main(int argc, char **argv)
 {
 
    int niter = atoi(argv[1]);
-   
+
    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    /* ~~~~~~~~~~~~~~~~~PARALLELIZE ME~~~~~~~~~~~~~~~~~~ */
    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-   /* Random Number Generation via MKL Random Number Stream */        
-   float * rand_buffer_x = (float*)malloc(batchsize*sizeof(float)); 
-   float * rand_buffer_y = (float*)malloc(batchsize*sizeof(float)); 
+   /* Random Number Generation via MKL Random Number Stream */
+   float * rand_buffer_x = (float*)malloc(batchsize*sizeof(float));
+   float * rand_buffer_y = (float*)malloc(batchsize*sizeof(float));
    VSLStreamStatePtr stream;
    int SEED = omp_get_thread_num() + time(NULL); /* RNG seed dependent on time of day and thread number*/
    vslNewStream( &stream, VSL_BRNG_SFMT19937, SEED );
-   
+
    /* Loop over Randomly Generated Numbers */
    int count = 0;
    int i,j;
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
    }
 
 
-   /* Delete the stream and buffers*/        
+   /* Delete the stream and buffers*/
    vslDeleteStream( &stream );
    free(rand_buffer_x);
    free(rand_buffer_y);
